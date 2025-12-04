@@ -1,0 +1,70 @@
+📂 Postman Collection: EventBase
+1️⃣ Auth (User)
+
+Signup – POST http://localhost:5000/api/auth/signup
+Body → raw → JSON:
+
+{
+  "name": "Arbaaz Hussain",
+  "email": "arbaaz@gmail.com",
+  "password": "123456"
+}
+
+
+Login – POST http://localhost:5000/api/auth/login
+Body → raw → JSON:
+
+{
+  "email": "arbaaz@gmail.com",
+  "password": "123456"
+}
+
+2️⃣ Events
+
+Create Event – POST http://localhost:5000/api/events
+Body → raw → JSON:
+
+{
+  "title": "React Workshop",
+  "description": "Learn React basics",
+  "venue": "Hall 1",
+  "date": "2025-12-10",
+  "totalSeats": 50
+}
+
+
+Get All Events – GET http://localhost:5000/api/events
+Body: None
+
+Get Single Event – GET http://localhost:5000/api/events/<event_id>
+Replace <event_id> with the ID returned from Create Event
+
+Update Event – PUT http://localhost:5000/api/events/<event_id>
+Body → raw → JSON:
+
+{
+  "venue": "Hall 2",
+  "totalSeats": 60
+}
+
+
+Delete Event – DELETE http://localhost:5000/api/events/<event_id>
+Body: None
+
+🔹 Steps to Use in Postman
+
+Open Postman → Import → Raw Text / JSON (ya manually create requests as above)
+
+Ensure Server running: node app.js
+
+Run requests in order:
+
+Signup
+
+Login
+
+Create Event
+
+Get All Events → check data
+
+Update / Delete → optional
