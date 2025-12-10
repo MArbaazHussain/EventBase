@@ -1,70 +1,184 @@
-📂 Postman Collection: EventBase
-1️⃣ Auth (User)
+1️⃣ Signup (Create User)
 
-Signup – POST http://localhost:5000/api/auth/signup
-Body → raw → JSON:
+URL:
+
+POST http://localhost:5000/api/auth/signup
+
+
+Body → raw → JSON
 
 {
   "name": "Arbaaz Hussain",
-  "email": "arbaaz@gmail.com",
+  "email": "arbaaz@test.com",
   "password": "123456"
 }
 
 
-Login – POST http://localhost:5000/api/auth/login
-Body → raw → JSON:
+Response:
 
 {
-  "email": "arbaaz@gmail.com",
+  "message": "User Registered Successfully!"
+}
+
+2️⃣ Login (Authenticate User + Get Token)
+
+URL:
+
+POST http://localhost:5000/api/auth/login
+
+
+Body → raw → JSON
+
+{
+  "email": "arbaaz@test.com",
   "password": "123456"
 }
 
-2️⃣ Events
 
-Create Event – POST http://localhost:5000/api/events
-Body → raw → JSON:
+Response:
 
 {
-  "title": "React Workshop",
-  "description": "Learn React basics",
-  "venue": "Hall 1",
-  "date": "2025-12-10",
-  "totalSeats": 50
+  "message": "Login successful",
+  "token": "<JWT_TOKEN_HERE>"
 }
 
 
-Get All Events – GET http://localhost:5000/api/events
-Body: None
+⚠️ Ye token aage Events CRUD ke liye zaruri hai.
 
-Get Single Event – GET http://localhost:5000/api/events/<event_id>
-Replace <event_id> with the ID returned from Create Event
+3️⃣ Create Event
 
-Update Event – PUT http://localhost:5000/api/events/<event_id>
-Body → raw → JSON:
+URL:
+
+POST http://localhost:5000/api/Events
+
+
+Headers:
+
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+
+Body → raw → JSON
 
 {
-  "venue": "Hall 2",
-  "totalSeats": 60
+  "title": "Tech Meetup",
+  "description": "A meetup about AI and ML",
+  "date": "2025-01-20",
+  "venue": "SZABIST Auditorium",
+  "availableSeats": 100,
+  "totalSeats": 100
 }
 
 
-Delete Event – DELETE http://localhost:5000/api/events/<event_id>
-Body: None
+Response:
 
-🔹 Steps to Use in Postman
+{
+  "message": "Event created successfully",
+  "event": { ...event object... }
+}
 
-Open Postman → Import → Raw Text / JSON (ya manually create requests as above)
+4️⃣ Get All Events
 
-Ensure Server running: node app.js
+URL:
 
-Run requests in order:
+GET http://localhost:5000/api/Events
 
-Signup
 
-Login
+Headers:
 
-Create Event
+Authorization: Bearer <JWT_TOKEN_HERE>
 
-Get All Events → check data
 
-Update / Delete → optional
+Response:
+
+[
+  {
+    "_id": "...",
+    "title": "Tech Meetup",
+    "description": "A meetup about AI and ML",
+    "date": "2025-01-20T00:00:00.000Z",
+    "venue": "SZABIST Auditorium",
+    "availableSeats": 100,
+    "totalSeats": 100
+  }
+]
+
+5️⃣ Get Single Event
+
+URL:
+
+GET http://localhost:5000/api/Events/<eventId>
+
+
+Headers:
+
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+
+Response:
+
+{
+  "_id": "...",
+  "title": "Tech Meetup",
+  "description": "A meetup about AI and ML",
+  "date": "2025-01-20T00:00:00.000Z",
+  "venue": "SZABIST Auditorium",
+  "availableSeats": 100,
+  "totalSeats": 100
+}
+
+6️⃣ Update Event
+
+URL:
+
+PUT http://localhost:5000/api/Events/<eventId>
+
+
+Headers:
+
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+
+Body → raw → JSON
+
+{
+  "title": "Tech Meetup Updated",
+  "description": "Updated discussion",
+  "availableSeats": 90
+}
+
+
+Response:
+
+{
+  "message": "Event updated successfully",
+  "event": { ...updated event object... }
+}
+
+7️⃣ Delete Event
+
+URL:
+
+DELETE http://localhost:5000/api/Events/<eventId>
+
+
+Headers:
+
+Authorization: Bearer <JWT_TOKEN_HERE>
+
+
+Response:
+
+{
+  "message": "Event deleted successfully!"
+}
+
+
+💡 Summary Notes for Subha Presentation:
+
+Signup + Login → create user + token
+
+Token → sab Event CRUD ke headers me mandatory
+
+CRUD → Create, Read (all/single), Update, Delete events
+
+Case sensitive → /Events not /events

@@ -7,10 +7,10 @@ app.use(express.json());
 
 // Routes
 const authRoutes = require("./routes/auth");
-const eventRoutes = require("./routes/events");
+const eventRoutes = require("./routes/Events");
 
 app.use("/api/auth", authRoutes);
-app.use("/api/events", eventRoutes);
+app.use("/api/Events", eventRoutes);
 
 // MongoDB Atlas Connection
 mongoose.connect("mongodb+srv://ArbaazHussain:keyboard3108@cluster0.ejj3klo.mongodb.net/eventbase?retryWrites=true&w=majority&appName=Cluster0")
