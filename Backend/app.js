@@ -29,8 +29,3 @@ mongoose.connect("mongodb+srv://ArbaazHussain:keyboard3108@cluster0.ejj3klo.mong
 // Start Server
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
-
-
-
